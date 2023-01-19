@@ -29,5 +29,5 @@ export const updateTodo = async (todo) => {
 
 export const deleteTodo = async ({ id }) => {
     await delay()
-    return await todosApi.delete(`${todosUrlEndpoint}/${id}`, id)
+    return await todosApi.delete(`${todosUrlEndpoint}/${id}`)
 }
