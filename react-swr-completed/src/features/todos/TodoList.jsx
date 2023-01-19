@@ -7,17 +7,17 @@ import useSWR from 'swr'
 
 import {
     getTodos,
+    addTodo,
+    updateTodo,
+    deleteTodo,
     todosUrlEndpoint as cacheKey,
 } from '../../api/todosApi'
 
 import {
-    addMutation as addTodo,
     addTodoOptions,
-    updateMutation as updateTodo,
     updateTodoOptions,
-    deleteMutation as deleteTodo,
     deleteTodoOptions,
-} from "../../helpers/todosMutations"
+} from "../../api/todosSWROptions"
 
 const TodoList = () => {
     const [newTodo, setNewTodo] = useState('')
@@ -34,8 +34,8 @@ const TodoList = () => {
     const addTodoMutation = async (newTodo) => {
         try {
             await mutate(
-                addTodo(newTodo, todos),
-                addTodoOptions(newTodo, todos)
+                addTodo(newTodo),
+                addTodoOptions(newTodo)
             )
 
             toast.success("Success! Added new item.", {
@@ -52,8 +52,8 @@ const TodoList = () => {
     const updateTodoMutation = async (updatedTodo) => {
         try {
             await mutate(
-                updateTodo(updatedTodo, todos),
-                updateTodoOptions(updatedTodo, todos)
+                updateTodo(updatedTodo),
+                updateTodoOptions(updatedTodo)
             )
 
             toast.success("Success! Updated item.", {
@@ -70,8 +70,8 @@ const TodoList = () => {
     const deleteTodoMutation = async ({ id }) => {
         try {
             await mutate(
-                deleteTodo({ id }, todos),
-                deleteTodoOptions({ id }, todos)
+                deleteTodo({ id }),
+                deleteTodoOptions({ id })
             )
 
             toast.success("Success! Deleted item.", {
